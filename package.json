@@ -1,0 +1,19 @@
+{
+    "name": "firsttestlmao",
+    "version": "1.0.0",
+    "description": "",
+    "main": "main.js",
+    "dependencies": {
+        "electron": "^8.2.3",
+        "mongoose": "^5.9.10"
+    },
+    "devDependencies": {
+        "electron-packager": "^14.2.1"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "electron ."
+    },
+    "author": "",
+    "license": "ISC"
+}
