@@ -1,18 +1,3 @@
-/*
-const mongoose = require("mongoose")
-mongoose.connect("mongodb+srv://DreamY:alpine@valiant-rg7zq.mongodb.net/test", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
-mongoose.connection.on('connected', () => {
-    document.getElementById("databasestatus").innerHTML = "Connected to database"
-})
-
-mongoose.connection.on('err', err => {
-    document.getElementById("databasestatus").innerHTML = "Error"
-})
-
-mongoose.connection.on('disconnected', () => {
-    document.getElementById("databasestatus").innerHTML = "Disconnected from database"
-})
-*/
 function hide(id) {
     document.getElementById(id).style.display = "none"
     return
