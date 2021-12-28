@@ -1,48 +1,40 @@
-function hide(id) {
-    document.getElementById(id).style.display = "none"
-    return
-}
+require("dotenv").config()
+const mongoose = require("mongoose");
+const { ipcRenderer } = require('electron')
+const Auth = require("./model/Auth")
+mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true });
 
-function show(id) {
-    document.getElementById(id).style.display = "block"
-    return
-}
-
-function generateRandomInteger(min, max) {
-    return Math.floor(min + Math.random() * (max + 1 - min))
-}
-
-document.getElementById("log1").addEventListener("focusout", () => {
-    if (!document.getElementById("log1").value) return
-    document.getElementById("log1").style.transition = "ease 0.25s"
-    document.getElementById("log1").style.borderColor = "#73AD21"
+document.querySelector("input[type=submit]").addEventListener("click", event => {
+    let fail
+    document.querySelectorAll("input").forEach(e => {
+        if (!e.value) {
+            e.style.borderColor = "red"
+            fail = true
+        } else e.style.borderColor = "#28afc7"
+    })
+    if (fail) return event.preventDefault()
+        //else it will POST to server
+        //but we will skip for now
+    event.preventDefault()
+    nextPage()
 })
 
-document.getElementById("log2").addEventListener("focusout", () => {
-    if (!document.getElementById("log2").value) return
-    document.getElementById("log2").style.transition = "ease 0.25s"
-    document.getElementById("log2").style.borderColor = "#73AD21"
+document.querySelector("input[type=button]").addEventListener("click", event => {
+    ipcRenderer.send('resize-aim', 1080, 720)
 })
 
-function login() {
-    if (!document.getElementById("log1").value) {
-        document.getElementById("log1").style.transition = "ease 0.25s"
-        document.getElementById("log1").style.borderColor = "red"
-    }
-    if (!document.getElementById("log2").value) {
-        document.getElementById("log2").style.transition = "ease 0.25s"
-        document.getElementById("log2").style.borderColor = "red"
-    }
-    if (!document.getElementById("log1").value || !document.getElementById("log2").value) return
-    hide("login")
-    show("modes")
-}
+document.querySelectorAll("input[type=text]").forEach(e => {
+    e.addEventListener("keyup", () => {
+        if (!e.value) e.style.borderColor = "red"
+        else e.style.borderColor = "#28afc7"
+    })
+    e.addEventListener("focusout", () => {
+        if (!e.value) e.style.borderColor = "red"
+        else e.style.borderColor = "#28afc7"
+    })
+})
 
-function express() {
-    hide("modes")
-    show("express")
-    show("stats")
-
+const express = () => {
     var progress = 0,
         generated = 0,
         hits = 0
@@ -91,8 +83,4 @@ function express() {
         progress += 0.10
         document.getElementById("progressbar").style.width = progress + "vw"
     }, 50)
-}
-
-function custom() {
-    // Implement Custom
 }
